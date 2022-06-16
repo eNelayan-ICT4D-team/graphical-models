@@ -1,0 +1,46 @@
+@startuml
+
+
+title Usecase Diagram
+left to right direction
+actor Fishmonger as f
+actor Buyer as b
+actor Facebook as fw
+
+package Frontend{
+    usecase "Create offer" as FUC1
+    usecase "Ping potential customers" as FUC2
+    usecase "Buy" as FUC3
+    usecase "Reserve" as FUC4
+    usecase "Search for specific offer" as FUC5
+    usecase "Social media integration" as FUC6
+    usecase "Navigation of offers" as FUC7
+    usecase "Change location" as FUC8
+}
+
+package Backend{
+    usecase "Create Dynamic Price" as BUC1
+    usecase "Process fishmonger offer" as BUC2
+    usecase "Process order/reservation" as BUC3
+    usecase "Find relevant offers" as BUC4
+}
+
+f --> FUC1
+FUC1 --> FUC2
+b --> FUC3
+b --> FUC4
+FUC2 --> b
+b --> FUC5
+b --> FUC6
+f --> FUC6
+b --> FUC7
+
+FUC1 --> BUC1
+BUC2 --> BUC1
+FUC3 --> BUC3
+FUC4 --> BUC3
+FUC6 --> fw
+FUC8 --> FUC7
+FUC7 --> BUC4
+FUC5 --> BUC4
+@enduml

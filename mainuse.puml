@@ -1,0 +1,30 @@
+@startuml mainuse
+actor Fishmonger as fm
+database Backend as be
+participant Frontend as fe
+participant SocialMedia as sm
+actor Buyers as b
+
+title Main use-case sequence diagram
+
+fm -> fe: ReportOffers
+be -> fe: SendDynamicPrice
+fm -> fe: ConfirmOffer
+fe -> be: ProcessOffer
+
+alt Buyer is subscribed to seller
+    be -> b: PingAboutOffer
+    b -> fe: login
+else Buyer is not subscribed 
+    b -> fe: login
+    fe -> be: fetchRelevantOffers
+end
+
+b -> fe: SelectOffer
+be -> fe: returnOfferDetails
+b -> fe: ReserveOffer
+fe -> be: ReserveOffer
+be -> fe: PingReservation
+fe -> fm: ReservationRecieved
+
+@enduml
